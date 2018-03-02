@@ -12,7 +12,6 @@
 namespace Gesdinet\JWTRefreshTokenBundle\EventListener;
 
 use Gesdinet\JWTRefreshTokenBundle\Model\RefreshTokenManagerInterface;
-use Gesdinet\JWTRefreshTokenBundle\Entity\RefreshToken;
 use Gesdinet\JWTRefreshTokenBundle\Request\RequestRefreshToken;
 use Lexik\Bundle\JWTAuthenticationBundle\Event\AuthenticationSuccessEvent;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -21,16 +20,40 @@ use Symfony\Component\HttpFoundation\RequestStack;
 
 class AttachRefreshTokenOnSuccessListener
 {
-    protected $userRefreshTokenManager;
+    /**
+     * @var RefreshTokenManagerInterface
+     */
+    protected $refreshTokenManager;
 
+    /**
+     * @var int
+     */
     protected $ttl;
 
+    /**
+     * @var ValidatorInterface
+     */
     protected $validator;
 
+    /**
+     * @var RequestStack
+     */
     protected $requestStack;
 
-    public function __construct(RefreshTokenManagerInterface $refreshTokenManager, $ttl, ValidatorInterface $validator, RequestStack $requestStack)
-    {
+    /**
+     * AttachRefreshTokenOnSuccessListener constructor.
+     *
+     * @param RefreshTokenManagerInterface $refreshTokenManager
+     * @param int                          $ttl
+     * @param ValidatorInterface           $validator
+     * @param RequestStack                 $requestStack
+     */
+    public function __construct(
+        RefreshTokenManagerInterface $refreshTokenManager,
+        $ttl,
+        ValidatorInterface $validator,
+        RequestStack $requestStack
+    ) {
         $this->refreshTokenManager = $refreshTokenManager;
         $this->ttl = $ttl;
         $this->validator = $validator;
