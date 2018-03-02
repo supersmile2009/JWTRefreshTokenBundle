@@ -36,22 +36,22 @@ class RefreshToken
     private $provider;
 
     /**
-     * @var AuthenticationSuccessHandlerInterface 
+     * @var AuthenticationSuccessHandlerInterface
      */
     private $successHandler;
 
     /**
-     * @var AuthenticationFailureHandlerInterface 
+     * @var AuthenticationFailureHandlerInterface
      */
     private $failureHandler;
 
     /**
-     * @var RefreshTokenManagerInterface 
+     * @var RefreshTokenManagerInterface
      */
     private $refreshTokenManager;
 
     /**
-     * @var integer
+     * @var int
      */
     private $ttl;
 
